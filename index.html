@@ -145,13 +145,21 @@ h2.t{font-size:clamp(30px,4vw,52px);margin-bottom:14px}
 .mail{margin-top:22px;color:var(--mute);font-size:15px;overflow-wrap:anywhere}
 footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:26px max(5vw,16px);color:var(--mute);font-size:14px}
 
+.rules{margin-top:18px;padding:24px 28px;border-radius:24px}
+.rules h3{font-size:19px;margin-bottom:10px}
+.rules ul{margin:0;padding-left:20px;color:var(--mute)}.rules li{margin:6px 0}.rules strong{color:var(--ink)}
+.card.full{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;border-color:rgba(255,154,122,.5);background:linear-gradient(135deg,rgba(255,154,122,.16),rgba(27,21,78,.72) 55%)}
+.card.full h3{font-size:clamp(22px,2.4vw,30px)}
+.fl{font-size:14px;color:var(--mute);margin-bottom:10px}
+.feats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.feats li{padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid var(--edge);font-size:15px}
 @media(max-width:900px){header nav{display:none}.card,.card.wide{grid-column:span 3}}
 @media(max-width:700px){
   .c1{flex-direction:column;justify-content:space-between;padding-top:110px}.c1 h2,.c1 h2:last-child{text-align:center;max-width:none}
   .c2,.c4{background:none}.c2 .box{margin-top:auto;background:var(--glass);padding:20px;border-radius:22px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.c0{padding-top:120px}.c4{align-items:flex-end}.c4 .box{max-width:none}
   .steps li{padding:8px 10px}.steps li span{display:none}
   .about{grid-template-columns:1fr}.facts,.creds{grid-template-columns:1fr}
-  .work{grid-template-columns:1fr}.card,.card.wide{grid-column:1/-1}
+  .work{grid-template-columns:1fr}.card,.card.wide{grid-column:1/-1}.card.full{grid-template-columns:1fr}
   .legcard{min-height:0;padding:16px 18px}.legcard ul{display:none}.legcard h3{font-size:20px}.route .wp{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){.rings svg{animation:none}}
@@ -171,7 +179,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 
 <header>
   <a class="brand" href="#top"><b>SP</b>Shashidhar Patil</a>
-  <nav aria-label="Main"><a href="#about">About</a><a href="#work">Work</a><a href="#skills">Skills</a></nav>
+  <nav aria-label="Main"><a href="#about">About</a><a href="#work">Work</a><a href="#ai">AI</a><a href="#skills">Skills</a></nav>
   <a class="pill" href="#contact">Get in touch</a>
 </header>
 
@@ -251,8 +259,22 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 
   <section class="band" id="work" style="padding-top:0"><div class="wrap">
     <h2 class="t">Selected work</h2>
-    <p class="sub">Products I've built or carried through big changes, across airlines, banking, connected vehicles and public services.</p>
+    <p class="sub">Products I've built or carried through big changes across airlines, banking and insurance, plus the travel app I'm building on my own time.</p>
     <div class="work" id="cards"></div>
+  </div></section>
+
+  <section class="band" id="ai" style="padding-top:0"><div class="wrap">
+    <h2 class="t">How I build with AI</h2>
+    <p class="sub">AI is part of my everyday engineering loop. It takes the routine work so I can spend more time on design, reliability and review, always inside my company's secure-development rules.</p>
+    <div class="work" id="aicards"></div>
+    <div class="glass rules">
+      <h3>My ground rules</h3>
+      <ul>
+        <li><strong>AI drafts, I decide.</strong> Every suggestion is read, tested and reviewed like any other code.</li>
+        <li><strong>Approved tools only.</strong> At Delta that means Kiro, the internal AI coding tool, within its secure-development and data-handling policies.</li>
+        <li><strong>No sensitive data in prompts.</strong> No customer, crew or production data ever leaves where it belongs.</li>
+      </ul>
+    </div>
   </div></section>
 
   <section class="band" id="skills" style="padding-top:0"><div class="wrap">
@@ -301,7 +323,17 @@ const work=[
  {k:"Health insurance · MSG",t:"Registration & profile PWA",d:"A progressive web app for three user groups with a three-step onboarding flow, third-party video identification and two-factor sign-in.",c:["Angular PWA","Keycloak","Argo CD","Docker"]},
  {k:"Banking · JPMorgan Chase",t:"Angular 6 → 15 upgrade",d:"Moved an enterprise controls app nine major versions forward, AG Grid included, verified by the automated test suite with no functional regressions.",c:["Angular","AG Grid","Java 11","Spinnaker"]}
 ];
-document.getElementById('cards').innerHTML=work.map(w=>`<article class="card glass${w.w?' wide':''}"><div class="k">${w.k}</div><h3>${w.t}</h3><p>${w.d}</p><div class="chips">${w.c.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+work.push({full:1,k:"Personal project · in progress",t:"Triova, an India-first travel super app",d:"One app for the whole trip, on web and mobile from a single Ionic + Angular codebase. The backend is thin Java 25 microservices plus AWS Lambda on a minimal AWS footprint for phase 0. Every screen is being prototyped first, then redesigned.",f:["Trip planning","Ride booking","Self-drive rentals","FASTag & tolls","Wallet & UPI","Voice assistant","SOS"],c:["Ionic + Angular","Java 25","AWS Lambda","Ola Maps","Razorpay","Booking.com API"]});
+document.getElementById('cards').innerHTML=work.map(w=>w.full?`<article class="card glass full"><div><div class="k">${w.k}</div><h3>${w.t}</h3><p>${w.d}</p><div class="chips">${w.c.map(x=>`<span>${x}</span>`).join('')}</div></div><div><div class="fl">What it covers</div><ul class="feats">${w.f.map(x=>`<li>${x}</li>`).join('')}</ul></div></article>`:`<article class="card glass${w.w?' wide':''}"><div class="k">${w.k}</div><h3>${w.t}</h3><p>${w.d}</p><div class="chips">${w.c.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+const ai=[
+ {k:"Understand",t:"Get up to speed on unfamiliar code",d:"Before changing one of the 20+ crew apps, I ask an AI assistant to map Spring Batch jobs, Control-M flows and service calls, then confirm the picture against the code."},
+ {k:"Build",t:"Scaffold, then refine",d:"I let AI generate the boilerplate, like JPA entities, REST controllers and Angular components, and spend my time on the logic. My incident-recovery prototype was scaffolded this way."},
+ {k:"Test",t:"Find the edge cases",d:"I ask for unit and integration test ideas, especially failure paths and boundary cases, and keep the ones that catch real bugs."},
+ {k:"Operate",t:"Faster triage and RCA",d:"During incidents I use AI to summarise logs and stack traces, line them up with recent deployments, and draft the root cause analysis that I then verify and finish."},
+ {k:"Ship",t:"Reviews, upgrades and docs",d:"I pre-review my own merge requests, plan version upgrades step by step, and draft READMEs, runbooks and release notes."},
+ {k:"Create",t:"Side projects with an AI team",d:"I'm building Triova, my travel super app, with a team of AI agents committed to the repo. I've also prototyped an AI agent that triages ServiceNow and Jira tickets, and this site was built with Claude."}
+];
+document.getElementById('aicards').innerHTML=ai.map(w=>`<article class="card glass"><div class="k">${w.k}</div><h3>${w.t}</h3><p>${w.d}</p></article>`).join('');
 const sk=[["Languages",["Java (8–25)","TypeScript","JavaScript","SQL","HTML","CSS"]],["Frameworks",["Angular","Spring Boot","Spring Batch","Microservices","REST APIs","Material UI","AG Grid","Ionic"]],["Cloud & infrastructure",["AWS Lambda","S3","CDK","CloudFormation","OpenShift","Kubernetes","Docker"]],["Messaging & data",["IBM MQ","Oracle","PostgreSQL"]],["DevOps & observability",["Gradle","Jenkins","Spinnaker","Argo CD","Git","Control-M","Dynatrace","PagerDuty"]]];
 document.getElementById('sk').innerHTML=sk.map(([h,l])=>`<div class="sk glass"><h3>${h}</h3><div class="chips">${l.map(x=>`<span>${x}</span>`).join('')}</div></div>`).join('');
 

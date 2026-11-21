@@ -17,7 +17,8 @@ The site tells my career as a single flight. As you scroll, a cel-shaded 3D jet 
 
 - **Story:** a scroll-driven 3D intro, the career flight plan, and the crew-app monitoring flow (detect, alert, auto rollback, root cause)
 - **About:** photo, bio and quick facts
-- **Selected work:** crew operations platform, self-healing monitoring, driver scoring engine, health registration PWA, and an Angular 6 → 15 upgrade
+- **Selected work:** crew operations platform, self-healing monitoring, driver scoring engine, health registration PWA, an Angular 6 → 15 upgrade, and **Triova**, my personal India-first travel super app (in progress)
+- **How I build with AI:** how I use AI day to day to understand code, scaffold, test, triage incidents, ship, and build side projects, plus my ground rules for using it safely
 - **Toolkit:** languages, frameworks, cloud, messaging and DevOps tools, plus certification and education
 - **Contact:** email, LinkedIn and GitHub
 
